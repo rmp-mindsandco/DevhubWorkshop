@@ -49,10 +49,11 @@ jobs:
         run: dotnet test ${{ env.solutionPath }} --no-build --verbosity normal
 
       - uses: actions/github-script@v8
+        name: "use-scripts"
         id: set-result
         with:
           script: return "Hello!"
-          result-encoding: JSON
+          result-encoding: json
       - name: Get result
         run: echo "${{steps.set-result.outputs.result}}"
 
