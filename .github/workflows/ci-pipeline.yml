@@ -44,6 +44,8 @@ jobs:
       - name: Build
         run: dotnet build ${{ env.solutionPath }} --configuration Release --no-restore
 
-        # bump version test
+      # Build Test
+      - name: Test
+        run: dotnet test --no-build --verbosity normal
 
       
