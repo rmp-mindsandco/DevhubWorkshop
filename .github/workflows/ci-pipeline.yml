@@ -46,6 +46,6 @@ jobs:
 
       # Build Test
       - name: Test
-        run: dotnet test --no-build --verbosity normal
+        run: dotnet test ${{ env.solutionPath }} --no-build --verbosity normal
 
       
