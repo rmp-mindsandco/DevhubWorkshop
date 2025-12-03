@@ -48,4 +48,12 @@ jobs:
       - name: Test
         run: dotnet test ${{ env.solutionPath }} --no-build --verbosity normal
 
+      - uses: actions/github-script@v8
+        id: set-result
+        with:
+          script: return "Hello!"
+          result-encoding: JSON
+      - name: Get result
+        run: echo "${{steps.set-result.outputs.result}}"
+
       
