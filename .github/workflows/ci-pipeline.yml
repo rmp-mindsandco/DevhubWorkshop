@@ -44,25 +44,19 @@ jobs:
       - name: Build
         run: dotnet build ${{ env.solutionPath }} --configuration Release --no-restore
 
-      # Build Test
-      - name: Test
-        run: dotnet test ${{ env.solutionPath }} --no-build --verbosity normal
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE }} # Only required for Organizations, not personal accounts.
 
-      # - uses: actions/github-script@v8
-      #   name: "Use-scripts"
-      #   id: set-result
+      # # Build Test
+      # - name: Test
+      #   run: dotnet test ${{ env.solutionPath }} --no-build --verbosity normal
+
+      # - name: Annotate
+      #   # You may pin to the exact commit or the version.
+      #   uses: JetBrains/ReSharper-InspectCode@v0.11
       #   with:
-      #     script: |
-      #       const script = require('./.github/workflows/scripts/analyzeInspectCodeOutput.ps1')
-      #       console.log(script({github, context}))
-      #     result-encoding: json
-      # - name: Get result
-      #   run: echo "${{steps.set-result.outputs.result}}"
-
-      - name: Annotate
-        # You may pin to the exact commit or the version.
-        uses: JetBrains/ReSharper-InspectCode@v0.11
-        with:
-          solution: ${{ env.solutionPath }}
+      #     solution: ${{ env.solutionPath }}
 
       
